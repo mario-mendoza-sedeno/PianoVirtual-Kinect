@@ -1,0 +1,101 @@
+﻿<Window x:Class="SkeletalFundamentals.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Width="800" Height="640"  Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Width="800" Height="330" Background="WhiteSmoke" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <!-- The Viewport3D provides a rendering surface for 3-D visual content. -->
+            <Viewport3D Name="viewport3D"  ClipToBounds="True">
+                <ModelVisual3D>
+                    <ModelVisual3D.Content>
+                        <DirectionalLight 
+	                        Color="White" 
+	                        Direction="0,-20, -5" />
+                    </ModelVisual3D.Content>
+                </ModelVisual3D>
+                <!-- Defines the camera used to view the 3D object. -->
+                <Viewport3D.Camera>
+                    <PerspectiveCamera 
+                            LookDirection="0,-5,-12"
+	                        Position="0,5,12" 
+	                        FieldOfView="90"/>
+                </Viewport3D.Camera>
+            </Viewport3D>
+        </Border>
+        <Border
+            Grid.Row="1" 
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            BorderBrush="Black"
+            BorderThickness="1"
+            Background="Aqua">
+            <Image Name="videoImage" 
+                   Width="360"
+                   Height="270"
+                   ClipToBounds="True"/>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0" Background="Gainsboro">
+            <Grid Margin="0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" UseLayoutRounding="False">
+                    <TextBlock TextWrapping="WrapWithOverflow" TextAlignment="Center">
+                        <Run Text="Angulo"/> 
+                            <LineBreak/>
+                         <Run Text="de"/> 
+                            <LineBreak/>
+                         <Run Text="Inclinación"/>
+                    </TextBlock>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center">
+                    <Slider Name="elevationAngleSlider" 
+                        Orientation="Vertical" 
+                        Value="0"
+                        Minimum="-27"
+                        Maximum="27" 
+                        TickPlacement="Both"
+                        TickFrequency="1.0"
+                        IsSnapToTickEnabled="True"
+                        AutoToolTipPrecision="0" 
+                        AutoToolTipPlacement="BottomRight"
+                        Thumb.DragCompleted="elevationAngleSlider_DragCompleted"/>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Name="elevationAngleTextBlock" Text="{Binding ElementName=elevationAngleSlider,Path=Value}" Foreground="#FF2E2E2E" />
+                </Border>
+            </Grid>
+            
+        </Border>
+        <Border
+            Grid.Row="1" 
+            Grid.Column="2"
+            VerticalAlignment="Top"
+            BorderBrush="WhiteSmoke"
+            BorderThickness="1"
+            Background="Beige">
+            <Image x:Name="depthImage"
+                   Width="360"
+                   Height="270"
+                   ClipToBounds="True"/>
+        </Border>
+        
+    </Grid>
+</Window>
