@@ -1,0 +1,11 @@
+# Project files #
+#################
+
+# Compiled source #
+###################
+ConsoleApplicationService/bin/
+ConsoleApplicationService/obj/
+Negocio/bin/
+Negocio/obj/
+PianoKinectWPF/bin/
+PianoKinectWPF/obj/
