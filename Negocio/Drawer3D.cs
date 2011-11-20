@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Media.Media3D;
 using System.Windows.Media;
 
-namespace PianoWPFClient.Utils
+namespace Negocio.Utils
 {
     public abstract class Drawer3D
     {

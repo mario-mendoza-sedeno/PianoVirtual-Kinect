@@ -5,11 +5,10 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
-using PianoWPFClient.Model;
-using PianoWPFClient.Utils;
+using Negocio.Model;
 
 
-namespace PianoWPFClient.Utils
+namespace Negocio.Utils
 {
     public class TecladoDrawer3D:Drawer3D
     {

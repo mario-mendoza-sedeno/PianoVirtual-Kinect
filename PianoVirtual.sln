@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PianoKinectWPF", "PianoKinectWPF\PianoKinectWPF.csproj", "{0AC14338-AC0E-45B7-B3BD-A47DA60A5A78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PianoWPFClient", "PianoKinectWPF\PianoWPFClient.csproj", "{0AC14338-AC0E-45B7-B3BD-A47DA60A5A78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PianoWPFClient", "Negocio\PianoWPFClient.csproj", "{62D5DD65-55A0-462F-885C-D8BE945F36CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "Negocio\Negocio.csproj", "{62D5DD65-55A0-462F-885C-D8BE945F36CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplicationService", "ConsoleApplicationService\ConsoleApplicationService.csproj", "{B188381A-F01F-4F39-8541-1E7410D31FCF}"
 EndProject

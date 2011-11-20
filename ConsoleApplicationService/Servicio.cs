@@ -18,7 +18,7 @@ namespace ConsoleApplicationService
         #endregion
 
 
-        public void PublicarNota(string nota)
+        public void PublicarNota(string hostName, string nota)
         {
 
             try
@@ -30,8 +30,8 @@ namespace ConsoleApplicationService
                     if (((ICommunicationObject)usuario).State == CommunicationState.Opened)
                     {
                         Negocio.Log.EscribirLog(nota);
-                        Console.WriteLine("id" + usuario.Id());
-                        usuario.EjecutarNota(nota);
+                        
+                        usuario.EjecutarNota(hostName, nota);
                         //Negocio.Logs.EscribirLogParticipante(mensajeParticipante, publicador);
                     }
                     else

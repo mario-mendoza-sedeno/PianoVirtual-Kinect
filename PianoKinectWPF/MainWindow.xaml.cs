@@ -16,11 +16,11 @@ using Coding4Fun.Kinect.Wpf;
 using Microsoft.Research.Kinect.Nui;
 using System.Windows.Media.Media3D;
 using System.ServiceModel;
-using PianoWPFClient;
-using PianoWPFClient.Model;
+using Negocio;
+using Negocio.Model;
 using KinectManipulation;
 
-namespace SkeletalFundamentals
+namespace PianoWPFClient
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -37,7 +37,8 @@ namespace SkeletalFundamentals
         public MainWindow()
         {
             InitializeComponent();
-            juego = new JuegoPiano(1, viewport3D);
+            juego = new JuegoPiano(viewport3D);
+            juego.
             Kinect.KinectDetection();
         }
         #endregion
@@ -67,7 +68,6 @@ namespace SkeletalFundamentals
             //Establecer un Action para cuando el skeleton este listo
             Kinect.TrackedUsersActionForSkeleton = (Action<List<KinectUser>>)delegate(List<KinectUser> kinectUsers)
             {
-                Console.WriteLine("users = " + kinectUsers.Count);
                 foreach (KinectUser kinectUser in kinectUsers) 
                 {
                     Point3D handLeft = new Point3D(kinectUser.HandLeft.X * _escala.Ancho, kinectUser.HandLeft.Y * _escala.Ancho, kinectUser.HandLeft.Z * _escala.Profundidad);

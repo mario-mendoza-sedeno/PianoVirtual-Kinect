@@ -23,16 +23,15 @@ namespace ConsoleApplicationService
 
 
         [OperationContract(IsOneWay=true)]
-        void PublicarNota(string nota);
+        void PublicarNota(string hostName, string nota);
     }
 
     [ServiceContract]
     public interface IServicioCallBack
     {
-        int Id();
 
         [OperationContract(IsOneWay=true)]
-        void EjecutarNota(string nota);
+        void EjecutarNota(string hostName, string nota);
     }
 
 }

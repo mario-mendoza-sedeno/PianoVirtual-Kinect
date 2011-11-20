@@ -6,7 +6,7 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace PianoWPFClient.Utils
+namespace Negocio.Utils
 {
     public sealed class BrushesTeclas
     {

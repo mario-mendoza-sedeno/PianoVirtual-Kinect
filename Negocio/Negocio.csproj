@@ -8,8 +8,8 @@
     <ProjectGuid>{62D5DD65-55A0-462F-885C-D8BE945F36CA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PianoWPFClient</RootNamespace>
-    <AssemblyName>PianoWPFClient</AssemblyName>
+    <RootNamespace>Negocio</RootNamespace>
+    <AssemblyName>Negocio</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -76,13 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Service References\PianoWSClient\service.wsdl" />
-    <None Include="Service References\PianoWSClient\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\PianoWSClient\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\PianoWSClient\" />
@@ -106,6 +99,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\PianoWSClient\service1.wsdl" />
+    <None Include="Service References\PianoWSClient\service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PianoWSClient\service21.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Sonidos\DO_sostenido_1.wav" />
   </ItemGroup>
   <ItemGroup>

@@ -54,9 +54,9 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Negocio\PianoWPFClient.csproj">
+    <ProjectReference Include="..\Negocio\Negocio.csproj">
       <Project>{62D5DD65-55A0-462F-885C-D8BE945F36CA}</Project>
-      <Name>PianoWPFClient</Name>
+      <Name>Negocio</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

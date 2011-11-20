@@ -6,15 +6,15 @@ using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
-using PianoWPFClient.Utils;
 using System.Windows.Media.Media3D;
 using System.Windows.Media.Animation;
 using System.IO;
 using System.Reflection;
 using System.Media;
-using PianoWPFClient.Properties;
+using Negocio.Properties;
+using Negocio.Utils;
 
-namespace PianoWPFClient.Model
+namespace Negocio.Model
 {
     public class Tecla
     {

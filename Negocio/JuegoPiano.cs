@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
-using PianoWPFClient.Model;
+using Negocio.Model;
 
-namespace PianoWPFClient
+namespace Negocio
 {
     public class JuegoPiano
     {
@@ -18,14 +18,14 @@ namespace PianoWPFClient
 
         public PianoWSDuplexClient pianoWSDuplexClient;
 
-        public JuegoPiano(int idJuego, Viewport3D viewport3D) {
+        public JuegoPiano(Viewport3D viewport3D) {
             Jugadores = new Dictionary<int,Jugador>();
             //Se inicializa el teclado con el número de octavas
             Teclado = new Teclado(2);
             Teclado.Draw3D(viewport3D);
             this.Viewport3D = viewport3D;
             //init WS
-            pianoWSDuplexClient = new PianoWSDuplexClient(idJuego);
+            pianoWSDuplexClient = new PianoWSDuplexClient();
             pianoWSDuplexClient.SetEjecutarNotaAction(delegate(string nota) {
                 Tecla tecla = Teclado.Teclas[nota];
                 tecla.UpdatePosition(new Point3D(0, - tecla.Dimensiones.Alto, 0));

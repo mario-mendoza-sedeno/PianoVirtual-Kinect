@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PianoWPFClient.PianoWSClient {
+namespace Negocio.PianoWSClient {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PianoWSClient.IServicio", CallbackContract=typeof(PianoWPFClient.PianoWSClient.IServicioCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PianoWSClient.IServicio", CallbackContract=typeof(Negocio.PianoWSClient.IServicioCallback))]
     public interface IServicio {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServicio/IniciarSesion", ReplyAction="http://tempuri.org/IServicio/IniciarSesionResponse")]
@@ -53,7 +53,7 @@ namespace PianoWPFClient.PianoWSClient {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServicioChannel : PianoWPFClient.PianoWSClient.IServicio, System.ServiceModel.IClientChannel {
+    public interface IServicioChannel : Negocio.PianoWSClient.IServicio, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -96,7 +96,7 @@ namespace PianoWPFClient.PianoWSClient {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServicioClient : System.ServiceModel.DuplexClientBase<PianoWPFClient.PianoWSClient.IServicio>, PianoWPFClient.PianoWSClient.IServicio {
+    public partial class ServicioClient : System.ServiceModel.DuplexClientBase<Negocio.PianoWSClient.IServicio>, Negocio.PianoWSClient.IServicio {
         
         private BeginOperationDelegate onBeginIniciarSesionDelegate;
         

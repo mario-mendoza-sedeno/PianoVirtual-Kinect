@@ -8,8 +8,8 @@
     <ProjectGuid>{0AC14338-AC0E-45B7-B3BD-A47DA60A5A78}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PianoWPF</RootNamespace>
-    <AssemblyName>PianoWPF</AssemblyName>
+    <RootNamespace>PianoWPFClient</RootNamespace>
+    <AssemblyName>PianoWPFClient</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -120,9 +120,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Negocio\PianoWPFClient.csproj">
+    <ProjectReference Include="..\Negocio\Negocio.csproj">
       <Project>{62D5DD65-55A0-462F-885C-D8BE945F36CA}</Project>
-      <Name>PianoWPFClient</Name>
+      <Name>Negocio</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PianoWPFClient.Model
+namespace Negocio.Model
 {
     public class TeclaFactory
     {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
-using PianoWPFClient.Model;
 using System.Windows.Media.Media3D;
 using System.Windows.Media;
+using Negocio.Model;
 
-namespace PianoWPFClient.Utils
+namespace Negocio.Utils
 {
     public class JugadorDrawer3D:Drawer3D
     {

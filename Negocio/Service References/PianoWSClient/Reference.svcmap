@@ -18,12 +18,12 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="net.tcp://localhost:4502/Servicio/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="net.tcp://192.168.1.188:4502/Servicio/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="65b2f3f3-1cbf-416d-824f-bb6c901f0c9d" SourceId="1" SourceUrl="net.tcp://localhost:4502/Servicio/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="e8a7aaba-e348-4231-befb-815cebf4f3fb" SourceId="1" SourceUrl="net.tcp://localhost:4502/Servicio/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="94ca4137-1a0e-4b10-a09d-47591807c872" SourceId="1" SourceUrl="net.tcp://localhost:4502/Servicio/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="af1be61c-2960-407a-bb47-353b5d1ce31d" SourceId="1" SourceUrl="net.tcp://192.168.1.188:4502/Servicio/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="66d624a2-f36f-4821-98ad-f43cc868b816" SourceId="1" SourceUrl="net.tcp://192.168.1.188:4502/Servicio/mex" />
+    <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="57dfcb9b-f49d-4ad1-8a40-3fe54ec15074" SourceId="1" SourceUrl="net.tcp://192.168.1.188:4502/Servicio/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
