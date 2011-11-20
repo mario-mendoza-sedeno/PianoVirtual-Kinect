@@ -67,12 +67,13 @@ namespace PianoWPFClient
             //Establecer un Action para cuando el skeleton este listo
             Kinect.TrackedUsersActionForSkeleton = (Action<List<KinectUser>>)delegate(List<KinectUser> kinectUsers)
             {
-                foreach (KinectUser kinectUser in kinectUsers) 
-                {
+                //foreach (KinectUser kinectUser in kinectUsers)
+                //{
+                    KinectUser kinectUser = kinectUsers[0];
                     Point3D handLeft = new Point3D(kinectUser.HandLeft.X * _escala.Ancho, kinectUser.HandLeft.Y * _escala.Ancho, kinectUser.HandLeft.Z * _escala.Profundidad);
                     Point3D handRight = new Point3D(kinectUser.HandRight.X * _escala.Ancho, kinectUser.HandRight.Y * _escala.Ancho, kinectUser.HandRight.Z * _escala.Profundidad);
                     juego.UpdatePosition(kinectUser.TrackingID, handLeft, handRight);
-                }
+                //}
             };
 
             //Establecer un Action para cuando se detecta un usuario nuevo
