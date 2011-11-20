@@ -5,6 +5,8 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
 using Negocio.Model;
+using System.Timers;
+using System.Windows.Threading;
 
 namespace Negocio
 {
@@ -30,6 +32,16 @@ namespace Negocio
                 Tecla tecla = Teclado.Teclas[nota];
                 tecla.UpdatePosition(new Point3D(0, - tecla.Dimensiones.Alto, 0));
                 tecla.Sonar();
+
+                //Timer para regresar la tecla a su lugar original
+                DispatcherTimer dispatcherTimer = new DispatcherTimer();
+                dispatcherTimer.Tick += new EventHandler((Action<object, EventArgs>)delegate(object sender, EventArgs e)
+                {
+                    tecla.UpdatePosition(new Point3D(0, 0, 0));
+                    (sender as DispatcherTimer).Stop();
+                });
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+                dispatcherTimer.Start();
             });
         }
 

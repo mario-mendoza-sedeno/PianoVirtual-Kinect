@@ -42,9 +42,9 @@ namespace Negocio.Model
             UriSound = new Uri(@"D:\mario\proyectos\kinect\PianoVirtual\Negocio\Sonidos\" + fileName, UriKind.Relative);
         }
 
-        public Stream getStreamSoundNota(string nota){
-            return Resources.ResourceManager.GetStream(nota, Resources.Culture);
-        }
+        //public Stream getStreamSoundNota(string nota){
+        //   return Resources.ResourceManager.GetStream(nota, Resources.Culture);
+        //}
 
         public bool IntersectsWith(Rect3D rect3D) {
             bool intersects = false;
