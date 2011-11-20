@@ -46,18 +46,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IServicio.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Negocio\Negocio.csproj">
-      <Project>{62D5DD65-55A0-462F-885C-D8BE945F36CA}</Project>
-      <Name>Negocio</Name>
-    </ProjectReference>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

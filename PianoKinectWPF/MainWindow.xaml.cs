@@ -38,7 +38,6 @@ namespace PianoWPFClient
         {
             InitializeComponent();
             juego = new JuegoPiano(viewport3D);
-            juego.
             Kinect.KinectDetection();
         }
         #endregion

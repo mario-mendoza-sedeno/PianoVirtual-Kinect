@@ -48,12 +48,12 @@ namespace Negocio
             Console.WriteLine("Servicio finalizado ...");
         }
 
-        //public void EjecutarNota(string hostName, string nota) {
-        //    Console.WriteLine("hostName =" + hostName);
-        //    if (_ejecutarNotaAction != null && !_hostName.Equals(hostName)) {
-        //        _ejecutarNotaAction.Invoke(nota);
-        //    }
-        //}
+        public void EjecutarNota(string hostName, string nota) {
+            Console.WriteLine("hostName =" + hostName);
+            if (_ejecutarNotaAction != null && !_hostName.Equals(hostName)) {
+                _ejecutarNotaAction.Invoke(nota);
+            }
+        }
 
         public void PublicarNota(string nota)
         {
@@ -63,21 +63,6 @@ namespace Negocio
         void _proxy_PublicarNotaCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             //  throw new NotImplementedException();
-        }
-
-        //public IAsyncResult BeginEjecutarNota(string hostName, string nota, AsyncCallback callback, object asyncState)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void EndEjecutarNota(IAsyncResult result)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        public void EjecutarNota(string hostName, string nota)
-        {
-            throw new NotImplementedException();
         }
 
         public IAsyncResult BeginEjecutarNota(string hostName, string nota, AsyncCallback callback, object asyncState)

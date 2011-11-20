@@ -22,11 +22,7 @@ namespace ConsoleApplicationService
 
                 // ya no es necesario utilizar el sv.close, por que se está utilizando el dispose implicito en el using
                 sv.Close();
-
-
-
             }
-
         }
     }
 }

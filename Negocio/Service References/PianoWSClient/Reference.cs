@@ -32,10 +32,10 @@ namespace Negocio.PianoWSClient {
         bool EndFinalizarSesion(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicio/PublicarNota")]
-        void PublicarNota(string nota);
+        void PublicarNota(string hostName, string nota);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IServicio/PublicarNota")]
-        System.IAsyncResult BeginPublicarNota(string nota, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginPublicarNota(string hostName, string nota, System.AsyncCallback callback, object asyncState);
         
         void EndPublicarNota(System.IAsyncResult result);
     }
@@ -44,10 +44,10 @@ namespace Negocio.PianoWSClient {
     public interface IServicioCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServicio/EjecutarNota")]
-        void EjecutarNota(string nota);
+        void EjecutarNota(string hostName, string nota);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, AsyncPattern=true, Action="http://tempuri.org/IServicio/EjecutarNota")]
-        System.IAsyncResult BeginEjecutarNota(string nota, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginEjecutarNota(string hostName, string nota, System.AsyncCallback callback, object asyncState);
         
         void EndEjecutarNota(System.IAsyncResult result);
     }
@@ -238,13 +238,13 @@ namespace Negocio.PianoWSClient {
             base.InvokeAsync(this.onBeginFinalizarSesionDelegate, null, this.onEndFinalizarSesionDelegate, this.onFinalizarSesionCompletedDelegate, userState);
         }
         
-        public void PublicarNota(string nota) {
-            base.Channel.PublicarNota(nota);
+        public void PublicarNota(string hostName, string nota) {
+            base.Channel.PublicarNota(hostName, nota);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginPublicarNota(string nota, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginPublicarNota(nota, callback, asyncState);
+        public System.IAsyncResult BeginPublicarNota(string hostName, string nota, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginPublicarNota(hostName, nota, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -253,8 +253,9 @@ namespace Negocio.PianoWSClient {
         }
         
         private System.IAsyncResult OnBeginPublicarNota(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            string nota = ((string)(inValues[0]));
-            return this.BeginPublicarNota(nota, callback, asyncState);
+            string hostName = ((string)(inValues[0]));
+            string nota = ((string)(inValues[1]));
+            return this.BeginPublicarNota(hostName, nota, callback, asyncState);
         }
         
         private object[] OnEndPublicarNota(System.IAsyncResult result) {
@@ -269,11 +270,11 @@ namespace Negocio.PianoWSClient {
             }
         }
         
-        public void PublicarNotaAsync(string nota) {
-            this.PublicarNotaAsync(nota, null);
+        public void PublicarNotaAsync(string hostName, string nota) {
+            this.PublicarNotaAsync(hostName, nota, null);
         }
         
-        public void PublicarNotaAsync(string nota, object userState) {
+        public void PublicarNotaAsync(string hostName, string nota, object userState) {
             if ((this.onBeginPublicarNotaDelegate == null)) {
                 this.onBeginPublicarNotaDelegate = new BeginOperationDelegate(this.OnBeginPublicarNota);
             }
@@ -284,6 +285,7 @@ namespace Negocio.PianoWSClient {
                 this.onPublicarNotaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnPublicarNotaCompleted);
             }
             base.InvokeAsync(this.onBeginPublicarNotaDelegate, new object[] {
+                        hostName,
                         nota}, this.onEndPublicarNotaDelegate, this.onPublicarNotaCompletedDelegate, userState);
         }
     }

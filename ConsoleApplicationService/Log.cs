@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Negocio
+namespace ConsoleApplicationService
 {
    public class Log
     {
@@ -15,6 +15,9 @@ namespace Negocio
            Console.WriteLine("");
            Console.WriteLine("");
            Console.WriteLine("");
+           
+
        }
+
     }
 }
