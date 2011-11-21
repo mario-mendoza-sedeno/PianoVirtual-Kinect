@@ -54,7 +54,7 @@ namespace Negocio
         }
 
         public void addJugador(int id) {
-            if (!Jugadores.ContainsKey(id) && Jugadores.Count != 1) {
+            if (!Jugadores.ContainsKey(id) && Jugadores.Count == 0) {
                 Jugador jugador = new Jugador(new Dimensiones(0.3, 0.10, 0.6));
                 jugador.Draw3D(Viewport3D);
                 Point3D posicionInicial = new Point3D(0.0, 0.4, 2.0);

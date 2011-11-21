@@ -39,7 +39,7 @@ namespace Negocio.Model
             //Sound = new SoundPlayer(getStreamSoundNota(nota.ToString()));
             MPlayer = new MediaPlayer();
             String fileName = nota.ToString() + ".wav";
-            UriSound = new Uri(@"D:\mario\proyectos\kinect\PianoVirtual\Negocio\Sonidos\" + fileName, UriKind.Relative);
+            UriSound = new Uri(@"D:\mario\proyectos\kinect\PianoVirtual\PianoWPFClient\Sonidos\" + fileName, UriKind.Relative);
         }
 
         //public Stream getStreamSoundNota(string nota){
