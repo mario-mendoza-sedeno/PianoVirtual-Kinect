@@ -27,7 +27,6 @@ namespace ConsoleApplicationService
                     {
                         Log.EscribirLog(nota);
                         usuario.EjecutarNota(hostName, nota);
-                        //Negocio.Logs.EscribirLogParticipante(mensajeParticipante, publicador);
                     }
                     else
                         Usuarios.Remove(usuario);
@@ -35,11 +34,11 @@ namespace ConsoleApplicationService
             }
             catch (AggregateException aex)
             {
-              //  Negocio.Logs.EscribirLogErrores(aex);
+                Console.WriteLine(aex.StackTrace);
             }
             catch (Exception ex)
             {
-              //  Negocio.Logs.EscribirLogErrores(ex);
+                Console.WriteLine(ex.StackTrace);
             }
 
         }

@@ -12,11 +12,7 @@ namespace ConsoleApplicationService
            Console.WriteLine("Hora:             " + DateTime.Now);
            Console.WriteLine("------------------" + DateTime.Now);
            Console.WriteLine("Nota:             " + mensaje);
-           Console.WriteLine("");
-           Console.WriteLine("");
-           Console.WriteLine("");
-           
-
+           Console.WriteLine("\n\n\n");
        }
 
     }
