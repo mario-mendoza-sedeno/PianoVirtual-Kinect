@@ -34,7 +34,7 @@ namespace Negocio.Model
         public override string ToString()
         {
             return new StringBuilder(TipoNota.ToString())
-                    .Append(((Sostenido) ? "_sostenido_" : ""))
+                    .Append(((Sostenido) ? "#" : ""))
                     .Append(Octava)
                     .ToString();
         }

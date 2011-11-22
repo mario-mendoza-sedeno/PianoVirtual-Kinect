@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ConsoleApplicationService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Servicio" in both code and config file together.
+    [ServiceBehavior(InstanceContextMode=InstanceContextMode.Single)]
     public class Servicio : IServicio
     {
 

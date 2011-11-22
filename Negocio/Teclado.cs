@@ -28,8 +28,8 @@ namespace Negocio
         {
             Octavas = octavas;
             Teclas = new Dictionary<string, Tecla>();
-            this.DimTeclaBlanca = new Dimensiones(1.0, 0.7, 6.0);
-            this.DimTeclaNegra = new Dimensiones(0.6, 0.85, 4.0);
+            this.DimTeclaBlanca = new Dimensiones(2.0, 1.4, 12.0);
+            this.DimTeclaNegra = new Dimensiones(1.2, 1.7, 8.0);
             TeclaFactory = new TeclaFactory(DimTeclaBlanca, DimTeclaNegra);
             
             //Agregar las octavas al teclado

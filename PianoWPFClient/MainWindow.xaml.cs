@@ -87,12 +87,19 @@ namespace PianoWPFClient
         private void elevationAngleSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
             Kinect.ElevationAngle = (int)((Slider)sender).Value;
+            juego.Prueba("hola mundo");
+            
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Kinect.Uninitialize();
             juego.FinalizarSesion();
+        }
+
+        private void elevationAngleSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
         }
 
     }

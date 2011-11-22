@@ -53,6 +53,13 @@ namespace Negocio
             pianoWSDuplexClient.FinalizarSesionAsync();
         }
 
+
+        public void Prueba(string nota)
+        {
+            pianoWSDuplexClient.PublicarNota(nota);
+        }
+
+
         public void addJugador(int id) {
             if (!Jugadores.ContainsKey(id) && Jugadores.Count == 0) {
                 Jugador jugador = new Jugador(new Dimensiones(0.3, 0.10, 0.6));
@@ -72,51 +79,53 @@ namespace Negocio
 
         public void UpdatePosition(int id, Point3D posicionManoIzq, Point3D posicionManoDer){
 
-            if (posicionManoIzq.Y < 0)
-            {
-                posicionManoIzq.Y = 0;
-                Jugadores[id].UpdatePositionManoIzquierda(posicionManoIzq);
-            }
-            if (posicionManoDer.Y < 0)
-            {
-                posicionManoDer.Y = 0;
-                Jugadores[id].UpdatePositionManoDerecha(posicionManoDer);
-            }
-            //actualizar posicion jugador
-            Jugadores[id].UpdatePositionManoIzquierda(posicionManoIzq);
-            Jugadores[id].UpdatePositionManoDerecha(posicionManoDer);
-            Rect3D boundsManoIzq = Jugadores[id].ManoIzquierda.Bounds;
-            Rect3D boundsManoDer = Jugadores[id].ManoDerecha.Bounds;
-            foreach (KeyValuePair<string, Tecla> pair in Teclado.Teclas)
-            {
-                Tecla tecla = pair.Value;
-                bool intersectsWithManoIzq = tecla.IntersectsWith(boundsManoIzq);
-                bool intersectsWithManoDer = tecla.IntersectsWith(boundsManoDer);
-
-                if (intersectsWithManoIzq || intersectsWithManoDer)
+            if (Jugadores.ContainsKey(id)) {
+                if (posicionManoIzq.Y < 0)
                 {
-                    if (intersectsWithManoIzq)
-                    {
-                        Point3D newPosition = new Point3D();
-                        newPosition.Y = boundsManoIzq.Y - tecla.Dimensiones.Alto;
-                        if (tecla.UpdatePosition(newPosition))
-                        {
-                            pianoWSDuplexClient.PublicarNota(tecla.Nota.ToString());
-                        }
-                    }
-                    if (intersectsWithManoDer)
-                    {
-                        Point3D newPosition = new Point3D();
-                        newPosition.Y = boundsManoDer.Y - tecla.Dimensiones.Alto;
-                        if (tecla.UpdatePosition(newPosition))
-                        {
-                            pianoWSDuplexClient.PublicarNota(tecla.Nota.ToString());
-                        }
-                    }
+                    posicionManoIzq.Y = 0;
+                    Jugadores[id].UpdatePositionManoIzquierda(posicionManoIzq);
                 }
-                else
+                if (posicionManoDer.Y < 0)
                 {
-                    tecla.UpdatePosition(new Point3D());
+                    posicionManoDer.Y = 0;
+                    Jugadores[id].UpdatePositionManoDerecha(posicionManoDer);
+                }
+                //actualizar posicion jugador
+                Jugadores[id].UpdatePositionManoIzquierda(posicionManoIzq);
+                Jugadores[id].UpdatePositionManoDerecha(posicionManoDer);
+                Rect3D boundsManoIzq = Jugadores[id].ManoIzquierda.Bounds;
+                Rect3D boundsManoDer = Jugadores[id].ManoDerecha.Bounds;
+                foreach (KeyValuePair<string, Tecla> pair in Teclado.Teclas)
+                {
+                    Tecla tecla = pair.Value;
+                    bool intersectsWithManoIzq = tecla.IntersectsWith(boundsManoIzq);
+                    bool intersectsWithManoDer = tecla.IntersectsWith(boundsManoDer);
+
+                    if (intersectsWithManoIzq || intersectsWithManoDer)
+                    {
+                        if (intersectsWithManoIzq)
+                        {
+                            Point3D newPosition = new Point3D();
+                            newPosition.Y = boundsManoIzq.Y - tecla.Dimensiones.Alto;
+                            if (tecla.UpdatePosition(newPosition))
+                            {
+                                pianoWSDuplexClient.PublicarNota(tecla.Nota.ToString());
+                            }
+                        }
+                        if (intersectsWithManoDer)
+                        {
+                            Point3D newPosition = new Point3D();
+                            newPosition.Y = boundsManoDer.Y - tecla.Dimensiones.Alto;
+                            if (tecla.UpdatePosition(newPosition))
+                            {
+                                pianoWSDuplexClient.PublicarNota(tecla.Nota.ToString());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        tecla.UpdatePosition(new Point3D());
+                    }
                 }
             }
         }

@@ -99,12 +99,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\PianoWSClient\service.wsdl" />
-    <None Include="Service References\PianoWSClient\service.xsd">
+    <None Include="Service References\PianoWSClient\service1.wsdl" />
+    <None Include="Service References\PianoWSClient\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Service References\PianoWSClient\service11.xsd">
       <SubType>Designer</SubType>
     </None>

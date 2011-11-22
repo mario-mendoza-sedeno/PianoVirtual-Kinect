@@ -8,7 +8,9 @@
     <GenerateInternalTypes>false</GenerateInternalTypes>
     <GenerateMessageContracts>false</GenerateMessageContracts>
     <NamespaceMappings />
-    <CollectionMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
     <UseSerializerForFaults>true</UseSerializerForFaults>
@@ -18,12 +20,12 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="net.tcp://localhost:4502/Servicio/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="net.tcp://192.168.1.188:4502/Servicio/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="980718b0-1d62-4b90-a841-b14ae50eb1b1" SourceId="1" SourceUrl="net.tcp://localhost:4502/Servicio/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="c5dd29e9-0294-4c26-a8eb-62dd771c8403" SourceId="1" SourceUrl="net.tcp://localhost:4502/Servicio/mex" />
-    <MetadataFile FileName="service11.xsd" MetadataType="Schema" ID="1f198bd5-949e-40ee-a85b-d35327ab4807" SourceId="1" SourceUrl="net.tcp://localhost:4502/Servicio/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="41a6d07b-13d4-4b05-956b-86c9af785071" SourceId="1" SourceUrl="net.tcp://192.168.1.188:4502/Servicio/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="2b45d581-3942-41b2-9ae7-6d6d54ed0503" SourceId="1" SourceUrl="net.tcp://192.168.1.188:4502/Servicio/mex" />
+    <MetadataFile FileName="service11.xsd" MetadataType="Schema" ID="599ca4a1-4bd6-48a6-9007-ce51cad2c7b5" SourceId="1" SourceUrl="net.tcp://192.168.1.188:4502/Servicio/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

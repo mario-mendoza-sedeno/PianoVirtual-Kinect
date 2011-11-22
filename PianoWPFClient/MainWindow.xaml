@@ -24,8 +24,8 @@
                 <!-- Defines the camera used to view the 3D object. -->
                 <Viewport3D.Camera>
                     <PerspectiveCamera 
-                            LookDirection="0,-5,-12"
-	                        Position="0,5,12" 
+                            LookDirection="0,-10,-25"
+	                        Position="0,10,24" 
 	                        FieldOfView="90"/>
                 </Viewport3D.Camera>
             </Viewport3D>
@@ -82,7 +82,7 @@
                         IsSnapToTickEnabled="True"
                         AutoToolTipPrecision="0" 
                         AutoToolTipPlacement="BottomRight"
-                        Thumb.DragCompleted="elevationAngleSlider_DragCompleted"/>
+                        Thumb.DragCompleted="elevationAngleSlider_DragCompleted" ValueChanged="elevationAngleSlider_ValueChanged" />
                     </Border>
                     <Border Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center">
                         <TextBlock Name="elevationAngleTextBlock" Text="{Binding ElementName=elevationAngleSlider,Path=Value}" Foreground="#FF2E2E2E" />
