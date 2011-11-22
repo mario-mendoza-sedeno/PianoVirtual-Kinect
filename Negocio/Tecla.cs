@@ -26,8 +26,6 @@ namespace Negocio.Model
 
         public Model3DGroup TeclaModel3D { get; set; }
 
-        //protected SoundPlayer Sound {get; set;}
-
         protected MediaPlayer MPlayer { get; set; }
 
         protected Uri UriSound { get; set; }
@@ -36,15 +34,10 @@ namespace Negocio.Model
 
         protected Tecla(Nota nota){
             Nota = nota;
-            //Sound = new SoundPlayer(getStreamSoundNota(nota.ToString()));
             MPlayer = new MediaPlayer();
             String fileName = nota.ToString() + ".wav";
-            UriSound = new Uri(@"D:\mario\proyectos\kinect\PianoVirtual\PianoWPFClient\Sonidos\" + fileName, UriKind.Relative);
+            UriSound = new Uri(@"Sonidos\" + fileName, UriKind.Relative);
         }
-
-        //public Stream getStreamSoundNota(string nota){
-        //   return Resources.ResourceManager.GetStream(nota, Resources.Culture);
-        //}
 
         public bool IntersectsWith(Rect3D rect3D) {
             bool intersects = false;
@@ -93,11 +86,11 @@ namespace Negocio.Model
         }
 
         public void Sonar() {
-            //Sound.Stop();
-            //Sound.Play();
             if (MPlayer.Clock != null)
             {
-                if (MPlayer.Clock.CurrentState == ClockState.Filling)
+                if (MPlayer.Clock.CurrentState == ClockState.Filling
+                    || MPlayer.Clock.CurrentState == ClockState.Stopped
+                    )
                 {
                     MPlayer.Clock.Controller.Begin();
                 }
