@@ -20,6 +20,8 @@ namespace Negocio
 
         public PianoWSDuplexClient pianoWSDuplexClient;
 
+        public bool Connected { get { return pianoWSDuplexClient.Connected; } }
+
         public JuegoPiano(Viewport3D viewport3D) {
             Jugadores = new Dictionary<int,Jugador>();
             //Se inicializa el teclado con el número de octavas
@@ -45,6 +47,16 @@ namespace Negocio
             });
         }
 
+        public void SetIniciarSesionCompletedAction(Action action)
+        {
+            pianoWSDuplexClient.SetIniciarSesionCompleted(action);
+        }
+
+        public void SetFinalizarSesionCompletedAction(Action action)
+        {
+            pianoWSDuplexClient.SetFinalizarSesionCompleted(action);
+        }
+
         public void IniciarSesion() {
             pianoWSDuplexClient.IniciarSesionAsync();
         }
@@ -54,14 +66,14 @@ namespace Negocio
         }
 
 
-        public void Prueba(string nota)
+        public void PublicarNota(string nota)
         {
             pianoWSDuplexClient.PublicarNota(nota);
         }
 
 
         public void addJugador(int id) {
-            if (!Jugadores.ContainsKey(id) && Jugadores.Count == 0) {
+            if (!Jugadores.ContainsKey(id)) {
                 Jugador jugador = new Jugador(new Dimensiones(0.3, 0.10, 0.6));
                 jugador.Draw3D(Viewport3D);
                 Point3D posicionInicial = new Point3D(0.0, 0.4, 2.0);
@@ -73,6 +85,16 @@ namespace Negocio
 
         public void removeJugador(int id) {
             if (Jugadores.ContainsKey(id)) {
+                Jugador jugador = Jugadores[id];
+                //Quitar las manos de la parte visual para dejar de presionar las teclas sobre las que este
+                UpdatePosition(id, new Point3D(0, 50, 0), new Point3D(0, 50, 0));
+                foreach(ModelVisual3D modelVisual3D in Viewport3D.Children.ToList()) {
+                    Model3D model3D = modelVisual3D.Content;
+                    if (model3D.Equals(jugador.ManoIzquierda) || model3D.Equals(jugador.ManoDerecha))
+                    {
+                        Viewport3D.Children.Remove(modelVisual3D);
+                    }
+                }
                 Jugadores.Remove(id);
             }
         }
