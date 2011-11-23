@@ -76,6 +76,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Service References\PianoWSClient\service.wsdl" />
+    <None Include="Service References\PianoWSClient\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PianoWSClient\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\PianoWSClient\" />
@@ -97,15 +104,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\PianoWSClient\service1.wsdl" />
-    <None Include="Service References\PianoWSClient\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\PianoWSClient\service11.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
