@@ -44,8 +44,15 @@ namespace PianoWPFClient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            juego.SetIniciarSesionCompletedAction(delegate() {
+                conectarWS.Content = "Desconectar";
+            });
+
+            juego.SetFinalizarSesionCompletedAction(delegate(){
+                conectarWS.Content = "Conectar";
+            });
+
             juego.IniciarSesion();
-            
 
             _escala = new Dimensiones(5, 5, 5);
 
@@ -82,6 +89,12 @@ namespace PianoWPFClient
             {
                 juego.addJugador(kinectUser.TrackingID);
             };
+
+            //Establecer un Action para cuando se deja de detectar un usuario nuevo
+            Kinect.RemoveKinectUserAction = (Action<KinectUser>)delegate(KinectUser kinectUser)
+            {
+                juego.removeJugador(kinectUser.TrackingID);
+            };
         }
 
         private void elevationAngleSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
@@ -95,10 +108,17 @@ namespace PianoWPFClient
             juego.FinalizarSesion();
         }
 
-        private void elevationAngleSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void conectarWS_Click(object sender, RoutedEventArgs e)
         {
-
+            if (juego.Connected)
+            {
+                conectarWS.Content = "Desconectando ...";
+                juego.FinalizarSesion();
+            }
+            else {
+                conectarWS.Content = "Conectando ...";
+                juego.IniciarSesion();
+            }
         }
-
     }
 }

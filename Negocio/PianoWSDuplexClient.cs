@@ -13,10 +13,16 @@ namespace Negocio
         protected InstanceContext _context;
         protected ServicioClient _proxy;
         protected Action<string> _ejecutarNotaAction;
-        readonly string _hostName = Dns.GetHostName();
+        protected Action _iniciarSesionCompletedAction;
+        protected Action _finalizarSesionCompletedAction;
+
+        public string HostName { get; private set;}
+
+        public bool Connected { get; set; }
 
         public PianoWSDuplexClient()
         {
+            HostName = Dns.GetHostName();
             _context = new InstanceContext(this);
             _proxy = new ServicioClient(_context);
 
@@ -30,6 +36,16 @@ namespace Negocio
             _ejecutarNotaAction = ejecutarNotaAction;
         }
 
+        public void SetIniciarSesionCompleted(Action iniciarSesionCompletedAction)
+        {
+            _iniciarSesionCompletedAction = iniciarSesionCompletedAction;
+        }
+
+        public void SetFinalizarSesionCompleted(Action finalizarSesionCompletedAction)
+        {
+            _finalizarSesionCompletedAction = finalizarSesionCompletedAction;
+        }
+
         public void IniciarSesionAsync() {
             _proxy.IniciarSesionAsync();
         }
@@ -40,24 +56,32 @@ namespace Negocio
 
         void _proxy_IniciarSesionCompleted(object sender, IniciarSesionCompletedEventArgs e)
         {
+            Connected = true;
             Console.WriteLine("Servicio iniciado ...");
+            if (_iniciarSesionCompletedAction != null) {
+                _iniciarSesionCompletedAction.Invoke();
+            }
         }
 
         void _proxy_FinalizarSesionCompleted(object sender, FinalizarSesionCompletedEventArgs e)
         {
+            Connected = false;
             Console.WriteLine("Servicio finalizado ...");
+            if (_finalizarSesionCompletedAction != null)
+            {
+                _finalizarSesionCompletedAction.Invoke();
+            }
         }
 
         public void EjecutarNota(string hostName, string nota) {
-            Console.WriteLine("hostName =" + hostName);
-            if (_ejecutarNotaAction != null && !_hostName.Equals(hostName)) {
+            if (_ejecutarNotaAction != null ) {
                 _ejecutarNotaAction.Invoke(nota);
             }
         }
 
         public void PublicarNota(string nota)
         {
-            _proxy.PublicarNotaAsync(_hostName, nota);
+            _proxy.PublicarNotaAsync(HostName, nota);
         }
 
         void _proxy_PublicarNotaCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)

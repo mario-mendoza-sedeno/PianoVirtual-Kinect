@@ -9,12 +9,7 @@ namespace Negocio
     {
        public static void EscribirLog(string mensaje)
        {
-           Console.WriteLine("Hora:             " + DateTime.Now);
-           Console.WriteLine("------------------" + DateTime.Now);
-           Console.WriteLine("Nota:             " + mensaje);
-           Console.WriteLine("");
-           Console.WriteLine("");
-           Console.WriteLine("");
+           Console.WriteLine(DateTime.Now + " : " + mensaje);
        }
     }
 }

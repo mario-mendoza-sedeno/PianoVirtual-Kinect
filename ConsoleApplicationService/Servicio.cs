@@ -21,15 +21,20 @@ namespace ConsoleApplicationService
         {
             try
             {
-                foreach (IServicioCallBack usuario in Usuarios)
+                IServicioCallBack callback = OperationContext.Current.GetCallbackChannel<IServicioCallBack>();
+                string callBackSessionId = ((IContextChannel)callback).SessionId;
+                Log.EscribirLog(hostName + " -> PublicarNota() " + nota);
+                foreach (IServicioCallBack usuario in Usuarios.Where(user => (!((IContextChannel)user).SessionId.Equals(callBackSessionId))))
                 {
-                    if (((ICommunicationObject)usuario).State == CommunicationState.Opened)
+                    if (((ICommunicationObject)usuario).State == CommunicationState.Opened && Usuarios.Contains(usuario))
                     {
-                        Log.EscribirLog(nota);
+                        Log.EscribirLog("-> " + ((IContextChannel)usuario).SessionId + ".EjecutarNota() ");
                         usuario.EjecutarNota(hostName, nota);
                     }
                     else
+                    {
                         Usuarios.Remove(usuario);
+                    }
                 }
             }
             catch (AggregateException aex)
@@ -48,26 +53,25 @@ namespace ConsoleApplicationService
             try
             {
                 IServicioCallBack callback = OperationContext.Current.GetCallbackChannel<IServicioCallBack>();
-                if (Usuarios.Contains(callback) == false)
+                IContextChannel contextChannel = (IContextChannel)callback;
+                if (!Usuarios.Contains(callback))
                 {
                     Usuarios.Add(callback);
 
                     //para evitar el error de timeout
-                    ((IContextChannel)callback).OperationTimeout = new TimeSpan(0, 0, 240);
+                    contextChannel.OperationTimeout = new TimeSpan(0, 0, 240);
 
                     //para evitar que los mensajes se queden en el buffer y mejore la salida inmeditamente
-                    ((IContextChannel)callback).AllowOutputBatching = false;
+                    contextChannel.AllowOutputBatching = false;
                     Log.EscribirLog("Sesion Iniciada");
 
-                  
                 }
                 return true;
 
             }
             catch (Exception ex)
             {
-                //Guardar en un log, la causa por la cual no pudo inicar sesión
-               
+                Console.WriteLine(ex.StackTrace);
                 return false;
             }
 
@@ -78,18 +82,16 @@ namespace ConsoleApplicationService
             try
             {
                 IServicioCallBack callback = OperationContext.Current.GetCallbackChannel<IServicioCallBack>();
-                if (Usuarios.Contains(callback) == true)
+                if (Usuarios.Contains(callback))
                 {
                     Usuarios.Remove(callback);
                     Log.EscribirLog("Sesion Finalizada");
-                   
                 }
                 return true;
             }
             catch (Exception ex)
             {
-                //TODO: Escribir un log, con la causa por la cual no pudo finalizar sesión
-            
+                Console.WriteLine(ex.StackTrace);
                 return false;
             }
         }

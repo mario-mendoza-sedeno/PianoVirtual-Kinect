@@ -9,10 +9,7 @@ namespace ConsoleApplicationService
     {
        public static void EscribirLog(string mensaje)
        {
-           Console.WriteLine("Hora:             " + DateTime.Now);
-           Console.WriteLine("------------------" + DateTime.Now);
-           Console.WriteLine("Nota:             " + mensaje);
-           Console.WriteLine("\n\n\n");
+           Console.WriteLine(DateTime.Now + " : " + mensaje);
        }
 
     }

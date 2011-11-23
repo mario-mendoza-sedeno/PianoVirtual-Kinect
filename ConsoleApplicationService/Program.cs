@@ -12,15 +12,13 @@ namespace ConsoleApplicationService
         static void Main(string[] args)
         {
             // como arrancar el servicio
-            using (ServiceHost sv = new ServiceHost(typeof(ConsoleApplicationService.Servicio))) // typeof  -> como service host acepta un object, utiliza el constructor que maneja el type(cualquier tipo)
+            // typeof  -> como service host acepta un object, utiliza el constructor que maneja el type(cualquier tipo)
+            using (ServiceHost sv = new ServiceHost(typeof(ConsoleApplicationService.Servicio))) 
             {
                 sv.Open();
-
                 Console.WriteLine("El servicio está listo");
                 Console.WriteLine("Presione <Enter> para terminar");
                 Console.ReadLine();
-
-                // ya no es necesario utilizar el sv.close, por que se está utilizando el dispose implicito en el using
                 sv.Close();
             }
         }
