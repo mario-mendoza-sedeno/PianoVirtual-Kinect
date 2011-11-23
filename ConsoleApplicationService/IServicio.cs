@@ -29,7 +29,6 @@ namespace ConsoleApplicationService
     [ServiceContract]
     public interface IServicioCallBack
     {
-
         [OperationContract(IsOneWay=true)]
         void EjecutarNota(string hostName, string nota);
     }

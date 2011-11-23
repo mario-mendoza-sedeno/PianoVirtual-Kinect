@@ -184,7 +184,6 @@ namespace KinectManipulation
                         }
                     }
                     //remove untracked users
-
                     foreach (KinectUser kinectUser in KinectUsers.Values.Where(user => (!user.Tracked)).ToList())
                     {
                         KinectUsers.Remove(kinectUser.TrackingID);
