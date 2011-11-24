@@ -15,8 +15,8 @@ namespace Negocio.Utils
         public static void Draw(Teclado teclado, Viewport3D viewport3D, Dimensiones dimTeclaBlanca, Dimensiones dimTeclaNegra) {
             Dictionary<string, Tecla> teclas = teclado.Teclas;
             int numTeclas = teclas.Count;
-            double separacionTeclas = 0.015;
-            double offset = -calcularAnchoTeclado(teclado, dimTeclaBlanca.Ancho, separacionTeclas)/2;
+            double separacionTeclas = 0.02;
+            double offsetX = -calcularAnchoTeclado(teclado, dimTeclaBlanca.Ancho, separacionTeclas)/2;
             //Dimensiones auxiliares con margen
             Dimensiones dimTeclaNegraConMargen = new Dimensiones();
             dimTeclaNegraConMargen.Ancho = dimTeclaNegra.Ancho + separacionTeclas * 2;
@@ -27,7 +27,7 @@ namespace Negocio.Utils
                 Tecla tecla = teclas.ElementAt(i).Value;
                 Tecla teclaAnterior = (i == 0) ? null : teclas.ElementAt(i - 1).Value;
                 Tecla teclaSiguiente = (i == numTeclas - 1) ? null : teclas.ElementAt(i + 1).Value;
-                double posicionX = offset + iTeclaBlanca * dimTeclaBlanca.Ancho;
+                double posicionX = offsetX + iTeclaBlanca * dimTeclaBlanca.Ancho;
                 posicionX += iTeclaBlanca * separacionTeclas;
                 ModelVisual3D model = null;
                 // tecla blanca

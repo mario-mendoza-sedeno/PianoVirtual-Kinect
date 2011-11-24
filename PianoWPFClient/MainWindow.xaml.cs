@@ -13,7 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 // namespaces
 using Coding4Fun.Kinect.Wpf;
-using Microsoft.Research.Kinect.Nui;
+using KinectNui = Microsoft.Research.Kinect.Nui;
 using System.Windows.Media.Media3D;
 using System.ServiceModel;
 using Negocio;
@@ -29,7 +29,7 @@ namespace PianoWPFClient
     {
         #region Campos
         JuegoPiano juego;
-        Dimensiones _escala;
+        Dimensiones factorConversion;
         #endregion
 
         #region Constructor
@@ -44,6 +44,9 @@ namespace PianoWPFClient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // Se ponen dimensiones menores al teclado (x= -14 +14, y= -2 +2, z= 0-12)
+            factorConversion = new Dimensiones(12, 1.5, 12);
+
             juego.SetIniciarSesionCompletedAction(delegate() {
                 conectarWS.Content = "Desconectar";
             });
@@ -53,8 +56,6 @@ namespace PianoWPFClient
             });
 
             juego.IniciarSesion();
-
-            _escala = new Dimensiones(5, 5, 5);
 
             // Leer el angulo de elavación actual del kinect 
             elevationAngleSlider.Value = Kinect.ElevationAngle;
@@ -74,13 +75,9 @@ namespace PianoWPFClient
             //Establecer un Action para cuando el skeleton este listo
             Kinect.TrackedUsersActionForSkeleton = (Action<List<KinectUser>>)delegate(List<KinectUser> kinectUsers)
             {
-                //foreach (KinectUser kinectUser in kinectUsers)
-                //{
-                if(kinectUsers.Count > 0) {
-                    KinectUser kinectUser = kinectUsers[0];
-                    Point3D handLeft = new Point3D(kinectUser.HandLeft.X * _escala.Ancho, kinectUser.HandLeft.Y * _escala.Ancho, kinectUser.HandLeft.Z * _escala.Profundidad);
-                    Point3D handRight = new Point3D(kinectUser.HandRight.X * _escala.Ancho, kinectUser.HandRight.Y * _escala.Ancho, kinectUser.HandRight.Z * _escala.Profundidad);
-                    juego.UpdatePosition(kinectUser.TrackingID, handLeft, handRight);
+                foreach (KinectUser kinectUser in kinectUsers)
+                {
+                    juego.UpdatePosition(kinectUser.TrackingID, escalarPosicion(kinectUser.HandLeft), escalarPosicion(kinectUser.HandRight));
                 }
             };
 
@@ -95,6 +92,11 @@ namespace PianoWPFClient
             {
                 juego.removeJugador(kinectUser.TrackingID);
             };
+        }
+
+        private Point3D escalarPosicion(KinectNui.Vector posicion) {
+            double z = 2 * factorConversion.Profundidad * posicion.Z - 3 * factorConversion.Profundidad;
+            return new Point3D(2 * posicion.X * factorConversion.Ancho, 2 * posicion.Y * factorConversion.Ancho, z);
         }
 
         private void elevationAngleSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)

@@ -20,8 +20,6 @@ namespace Negocio
 
         public Dimensiones DimTeclaNegra { get; set; }
 
-        private TeclaFactory TeclaFactory { get; set; }
-
         private int Octavas { get; set; }
 
         public Teclado(int octavas)
@@ -30,7 +28,6 @@ namespace Negocio
             Teclas = new Dictionary<string, Tecla>();
             this.DimTeclaBlanca = new Dimensiones(2.0, 1.4, 12.0);
             this.DimTeclaNegra = new Dimensiones(1.2, 1.7, 8.0);
-            TeclaFactory = new TeclaFactory(DimTeclaBlanca, DimTeclaNegra);
             
             //Agregar las octavas al teclado
             // DO, DO#, RE, RE#, MI, FA, FA#, SOL, SOL#, LA, LA#, SI
@@ -51,7 +48,8 @@ namespace Negocio
         }
 
         private void AddNewTecla(TipoNota tipo, bool sostenido, int octava) {
-            Tecla tecla = TeclaFactory.newTecla(tipo, sostenido, octava);
+            TeclaFactory teclaFactory = new TeclaFactory(DimTeclaBlanca, DimTeclaNegra);
+            Tecla tecla = teclaFactory.newTecla(tipo, sostenido, octava);
             Teclas.Add(tecla.Nota.ToString(), tecla);
         }
 
