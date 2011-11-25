@@ -139,7 +139,7 @@ namespace KinectManipulation
                 if (BitmapSourceActionForDepth != null) 
                 {
                     PlanarImage depthImage = e.ImageFrame.Image;
-                    byte[] convertedBits = ConvertDepthFrame(e.ImageFrame.Image.Bits);
+                    byte[] convertedBits = GenerateColoredBytes(e.ImageFrame);
                     BitmapSourceActionForDepth.Invoke(BitmapSource.Create(depthImage.Width, depthImage.Height, NinetySix, NinetySix, PixelFormats.Bgr32, null,
                         convertedBits, depthImage.Width * Four));
                 }
@@ -223,6 +223,144 @@ namespace KinectManipulation
                     runtime.NuiCamera.ElevationAngle = value;
                 }
             }
+        }
+
+        private static byte[] GenerateColoredBytes(ImageFrame imageFrame)
+        {
+            int height = imageFrame.Image.Height;
+            int width = imageFrame.Image.Width;
+
+            //profunidad de datos por cada pixel
+            Byte[] depthData = imageFrame.Image.Bits;
+
+            //ColorFrame contiene información de todos los pixeles en la imagen
+            //Height x Width x 4  (Red, Green, Blue, empty byte)
+            Byte[] colorFrame = new byte[imageFrame.Image.Height * imageFrame.Image.Width * 4];
+
+            //Bgr32  -blue, green red, emptybyte
+            //Bgra32 - blue, green, red, transparency
+            // you must set transparency for Bgra32 as .NET Default a byte to 0 = fully transparency
+
+            //hardcore location to Blue, Green, Red (BGR) Index position
+            const int BlueIndex = 0;
+            const int GreenIndex = 1;
+            const int RedIndex = 2;
+
+
+            var depthIndex = 0;
+            for (var y = 0; y < height; y++)
+            {
+                var heightOffset = y * width;
+                for (var x = 0; x < width; x++)
+                {
+
+                    var index = ((width - x - 1) + heightOffset) * 4;
+                    var distance = GetDistanceWithPlayerIndex(depthData[depthIndex], depthData[depthIndex + 1]);
+                    depthIndex += 2;
+                    if (distance <= 400)
+                    {
+                        // we are very close
+                        colorFrame[index + BlueIndex] = 255;
+                        colorFrame[index + GreenIndex] = 0;
+                        colorFrame[index + RedIndex] = 0;
+                    }
+                    if (distance > 400 && distance <= 800)
+                    {
+                        colorFrame[index + BlueIndex] = 255;
+                        colorFrame[index + GreenIndex] = 255;
+                        colorFrame[index + RedIndex] = 0;
+                    }
+                    if (distance > 800 && distance <= 1200)
+                    {
+                        colorFrame[index + BlueIndex] = 255;
+                        colorFrame[index + GreenIndex] = 0;
+                        colorFrame[index + RedIndex] = 255;
+                    }
+                    if (distance > 1200 && distance <= 1600)
+                    {
+                        colorFrame[index + BlueIndex] = 0;
+                        colorFrame[index + GreenIndex] = 255;
+                        colorFrame[index + RedIndex] = 255;
+                    }
+                    if (distance > 1600 && distance <= 2000)
+                    {
+                        colorFrame[index + BlueIndex] = 0;
+                        colorFrame[index + GreenIndex] = 0;
+                        colorFrame[index + RedIndex] = 255;
+                    }
+
+                    if (distance > 2000 && distance <= 2400)
+                    {
+                        colorFrame[index + BlueIndex] = 0;
+                        colorFrame[index + GreenIndex] = 255;
+                        colorFrame[index + RedIndex] = 0;
+                    }
+
+                    else if (distance > 2400 && distance <= 2800)
+                    {
+                        colorFrame[index + BlueIndex] = 231;
+                        colorFrame[index + GreenIndex] = 231;
+                        colorFrame[index + RedIndex] = 24;
+                    }
+                    else if (distance > 2800 && distance <= 3200)
+                    {
+                        colorFrame[index + BlueIndex] = 0;
+                        colorFrame[index + GreenIndex] = 0;
+                        colorFrame[index + RedIndex] = 128;
+                    }
+
+                    else if (distance > 3200 && distance <= 3600)
+                    {
+                        colorFrame[index + BlueIndex] = 200;
+                        colorFrame[index + GreenIndex] = 255;
+                        colorFrame[index + RedIndex] = 100;
+                    }
+
+
+
+                    else if (distance > 3600)
+                    {
+                        colorFrame[index + BlueIndex] = 0;
+                        colorFrame[index + GreenIndex] = 0;
+                        colorFrame[index + RedIndex] = 0;
+                    }
+
+
+                }
+            }
+
+
+            return colorFrame;
+        }
+
+        private static int GetDistanceWithPlayerIndex(byte firstFrame, byte secondFrame)
+        {
+            //offset by 3 in first byte to get value after player index
+            int distance = (int)(firstFrame >> 3 | secondFrame << 5);
+
+
+            return distance;
+
+        }
+
+        private static int GetPlayerIndex(byte firstFrame)
+        {
+            // returns  0 = no players;    1 = primer player;     2 = second player
+            // bitwise & on firstFrame
+            return (int)firstFrame & 7;
+
+        }
+
+        const float MaxDepthDistance = 4000;  //maximun value returned
+        const float MinDepthDistance = 850;   // minimun distance returned
+        const float MaxDepthDistanceOffeset = MaxDepthDistance - MinDepthDistance;
+
+
+        public static byte CalculateIntensityFromDepth(int distance)
+        {
+            //fórmula para calcular la intensidad monocromática para el histograma
+            return (byte)(255 - (255 * Math.Max(distance - MinDepthDistance, 0) / (MaxDepthDistanceOffeset)));
+
         }
 
         static byte[] ConvertDepthFrame(byte[] depthFrame16)
