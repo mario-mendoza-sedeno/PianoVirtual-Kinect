@@ -112,7 +112,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -180,11 +182,11 @@
     <Content Include="Sonidos\SOL2.wav" />
   </ItemGroup>
   <ItemGroup>
-      <SonidosNotas Include=".\Sonidos\*.wav"/>
-   </ItemGroup>
+    <SonidosNotas Include=".\Sonidos\*.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
-	<Copy SourceFiles="@(SonidosNotas)" DestinationFolder="$(OutputPath)Sonidos" /> 
+    <Copy SourceFiles="@(SonidosNotas)" DestinationFolder="$(OutputPath)Sonidos" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

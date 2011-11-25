@@ -29,7 +29,13 @@ namespace Negocio
             _proxy.IniciarSesionCompleted += new EventHandler<IniciarSesionCompletedEventArgs>(_proxy_IniciarSesionCompleted);
             _proxy.FinalizarSesionCompleted += new EventHandler<FinalizarSesionCompletedEventArgs>(_proxy_FinalizarSesionCompleted);
             _proxy.PublicarNotaCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(_proxy_PublicarNotaCompleted);
-           
+            _proxy.InnerDuplexChannel.Faulted += new EventHandler(InnerDuplexChannel_Faulted);
+
+        }
+
+        void InnerDuplexChannel_Faulted(object sender, EventArgs e)
+        {
+           // throw new NotImplementedException();
         }
 
         public void SetEjecutarNotaAction(Action<string> ejecutarNotaAction) {
@@ -52,6 +58,7 @@ namespace Negocio
 
         public void FinalizarSesionAsync() { 
             _proxy.FinalizarSesionAsync();
+            //_proxy.Close();
         }
 
         void _proxy_IniciarSesionCompleted(object sender, IniciarSesionCompletedEventArgs e)

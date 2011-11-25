@@ -23,17 +23,20 @@ namespace ConsoleApplicationService
             {
                 IServicioCallBack callback = OperationContext.Current.GetCallbackChannel<IServicioCallBack>();
                 string callBackSessionId = ((IContextChannel)callback).SessionId;
-                Log.EscribirLog(hostName + " -> PublicarNota() " + nota);
-                foreach (IServicioCallBack usuario in Usuarios.Where(user => (!((IContextChannel)user).SessionId.Equals(callBackSessionId))))
+                if (Usuarios.Contains(callback))
                 {
-                    if (((ICommunicationObject)usuario).State == CommunicationState.Opened && Usuarios.Contains(usuario))
+                    Log.EscribirLog(hostName + " -> PublicarNota() " + nota);
+                    foreach (IServicioCallBack usuario in Usuarios.Where(user => (!((IContextChannel)user).SessionId.Equals(callBackSessionId))))
                     {
-                        Log.EscribirLog("-> " + ((IContextChannel)usuario).SessionId + ".EjecutarNota() ");
-                        usuario.EjecutarNota(hostName, nota);
-                    }
-                    else
-                    {
-                        Usuarios.Remove(usuario);
+                        if (((ICommunicationObject)usuario).State == CommunicationState.Opened && Usuarios.Contains(usuario))
+                        {
+                            Log.EscribirLog("-> " + ((IContextChannel)usuario).SessionId + ".EjecutarNota() ");
+                            usuario.EjecutarNota(hostName, nota);
+                        }
+                        else
+                        {
+                            Usuarios.Remove(usuario);
+                        }
                     }
                 }
             }
