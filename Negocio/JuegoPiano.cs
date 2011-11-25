@@ -42,7 +42,7 @@ namespace Negocio
                     tecla.UpdatePosition(new Point3D(0, 0, 0));
                     (sender as DispatcherTimer).Stop();
                 });
-                dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 1);
                 dispatcherTimer.Start();
             });
         }
